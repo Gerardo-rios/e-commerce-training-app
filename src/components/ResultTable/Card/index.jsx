@@ -1,7 +1,15 @@
+import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { Detail } from './Detail'
 import { SearchContext } from '../../../contexts/SearchContext';
 import './Card.css'
+
+Card.propTypes = {
+    image: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+};
 
 function Card ({ image, title, price, description }) {
     const {

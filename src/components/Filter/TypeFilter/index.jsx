@@ -1,4 +1,15 @@
+import PropTypes from 'prop-types';
 import './TypeFilter.css'
+
+TypeFilter.propTypes = {
+    name: PropTypes.string.isRequired,
+    options: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            label: PropTypes.string.isRequired,
+        })
+    ).isRequired,
+};
 
 function TypeFilter ({name, options}) {
     return (

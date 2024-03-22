@@ -1,5 +1,11 @@
+import PropTypes from 'prop-types';
 import { Rating } from "../../../Filter/RatingFilter/Rating"
 import './Detail.css'
+
+Detail.propTypes = {
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+};
 
 function Detail ({title, price }) {
     return (

@@ -1,6 +1,11 @@
+import PropTypes from 'prop-types';
 import { useState, useEffect, createContext } from "react";
 
 const SearchContext = createContext();
+
+SearchProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 function SearchProvider({ children }) {
   const [isOpen, setIsOpen] = useState(false)

@@ -1,8 +1,8 @@
 # Store App - Module 1 Test
 
-This is the application to test the knowledge gained in the first module of the ioet university 2.0.
+This is the application to test the knowledge gained in the second module of the ioet university 2.0.
 
-The application stucture is the following:
+The application structure is the following:
 
 ```
 - assets
@@ -20,7 +20,7 @@ The application stucture is the following:
 
 ### Run the application
 
-Open your favourite terminal in the root and install the npm dependencies with:
+Open your favorite terminal in the root and install the npm dependencies with:
 
 ```
 npm install
@@ -42,7 +42,7 @@ Keep in mind that there are various types of lind warnings. We advice to solve e
 
 - You are not forbidden to ask for help, remember that asking for help is what differentiates us from other companies.
 
-- You can always learn something new, so try to extract as much knowlegde as you can
+- You can always learn something new, so try to extract as much knowledge as you can
 
 ## Requirements
 
@@ -56,7 +56,7 @@ Keep in mind that there are various types of lind warnings. We advice to solve e
 
 - Fix the filter by category. The filter should apply when the category is selected. Remember to use the `category` attribute from the API.
 
-- Fix the filters by rate so that the app can use the same rate from the API. The attriobute you should use is `rate` that is inside the attribute `rating`
+- Fix the filters by rate so that the app can use the same rate from the API. The attribute you should use is `rate` that is inside the attribute `rating`
 
 - Create a component for the cart. [Here](https://www.figma.com/file/sABAS69warhZ3197HQmSyn/store?type=design&node-id=0%3A1&mode=design&t=APO0wcv7u2swFIC4-1) is the mockup of the cart. The implementation needs to match the design of figma and it should be functional.
 
@@ -64,6 +64,6 @@ Keep in mind that there are various types of lind warnings. We advice to solve e
 
 It is important to complete this task in order to complete the following tasks:
 - Include the “Add to cart” function for each product.
-- Include the “Remove from cart” funcion each product added to the cart.
+- Include the “Remove from cart” function each product added to the cart.
 
 For both tasks you can use the UseContext hook.
