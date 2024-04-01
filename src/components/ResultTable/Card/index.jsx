@@ -9,15 +9,17 @@ Card.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
+    rate: PropTypes.number.isRequired,
 };
 
-function Card ({ image, title, price, description }) {
+function Card ({ image, title, price, description, rate }) {
     const {
         setIsOpen,
         setImageProduct,
         setTitleProduct,
         setPriceProduct,
         setDescriptionProduct,
+        setProductRate,
     } = useContext(SearchContext);
 
     const openModal = () => {
@@ -26,6 +28,7 @@ function Card ({ image, title, price, description }) {
         setTitleProduct(title)
         setPriceProduct(price)
         setDescriptionProduct(description)
+        setProductRate(rate)
     }
 
     return (
@@ -36,6 +39,7 @@ function Card ({ image, title, price, description }) {
             <Detail 
                 title = {title}
                 price = {price}
+                rate = {rate}
             />
         </div>
     )
