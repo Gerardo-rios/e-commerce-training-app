@@ -18,6 +18,8 @@ function SearchProvider({ children }) {
   const [descriptionProduct, setDescriptionProduct] = useState("");
   const [productRate, setProductRate] = useState(0);
   const [filterByPriceValue, setFilterByPriceValue] = useState("Name");
+  const [searchedProducts, setSearchedProducts] = useState([]);
+  const [filterByCategoryValue, setFilterByCategoryValue] = useState("");
 
   const getData = async () => {
     const response = await fetch("https://fakestoreapi.com/products");
@@ -38,21 +40,31 @@ function SearchProvider({ children }) {
     fetchData();
   }, []);
 
-  const searchedProducts = products.filter((product) => {
-    const productName = product.title.toLowerCase();
-    const searchText = searchValue.toLowerCase();
-    return productName.includes(searchText);
-  }).sort((a, b) => {
-      switch (filterByPriceValue) {
-          case "Price_Low":
-              return a.price - b.price;
-          case "Price_High":
-              return b.price - a.price;
-          default:
-            return a.title.localeCompare(b.title);
-      }
-  });
+  useEffect(() => {
+    let filteredProducts = products.filter((product) => {
+      const productName = product.title.toLowerCase();
+      const searchText = searchValue.toLowerCase();
+      return productName.includes(searchText);
+    }).sort((a, b) => {
+        switch (filterByPriceValue) {
+            case "Price_Low":
+                return a.price - b.price;
+            case "Price_High":
+                return b.price - a.price;
+            default:
+              return a.title.localeCompare(b.title);
+        }
+    });
 
+    if (filterByCategoryValue) {
+      filteredProducts = filteredProducts.filter((product) => {
+        const productCategory = product.category.toLowerCase();
+        return productCategory === filterByCategoryValue;
+      });
+    }
+
+    setSearchedProducts(filteredProducts);
+  }, [products, searchValue, filterByPriceValue, filterByCategoryValue]);
 
   return (
     <SearchContext.Provider
@@ -60,6 +72,7 @@ function SearchProvider({ children }) {
         searchValue,
         setSearchValue,
         searchedProducts,
+        setSearchedProducts,
         isLoading,
         isOpen,
         setIsOpen,
@@ -75,6 +88,8 @@ function SearchProvider({ children }) {
         setProductRate,
         filterByPriceValue,
         setFilterByPriceValue,
+        filterByCategoryValue,
+        setFilterByCategoryValue,
       }}
     >
       {children}
