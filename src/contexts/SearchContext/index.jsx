@@ -17,6 +17,7 @@ function SearchProvider({ children }) {
   const [priceProduct, setPriceProduct] = useState("");
   const [descriptionProduct, setDescriptionProduct] = useState("");
   const [productRate, setProductRate] = useState(0);
+  const [filterByPriceValue, setFilterByPriceValue] = useState("Name");
 
   const getData = async () => {
     const response = await fetch("https://fakestoreapi.com/products");
@@ -41,7 +42,17 @@ function SearchProvider({ children }) {
     const productName = product.title.toLowerCase();
     const searchText = searchValue.toLowerCase();
     return productName.includes(searchText);
+  }).sort((a, b) => {
+      switch (filterByPriceValue) {
+          case "Price_Low":
+              return a.price - b.price;
+          case "Price_High":
+              return b.price - a.price;
+          default:
+            return a.title.localeCompare(b.title);
+      }
   });
+
 
   return (
     <SearchContext.Provider
@@ -62,6 +73,8 @@ function SearchProvider({ children }) {
         setDescriptionProduct,
         productRate,
         setProductRate,
+        filterByPriceValue,
+        setFilterByPriceValue,
       }}
     >
       {children}
