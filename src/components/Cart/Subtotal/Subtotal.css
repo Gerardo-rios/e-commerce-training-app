@@ -6,12 +6,12 @@
     padding: 20px;
     border-bottom: solid 1px #7E7E7E;
 }
-  
+
 .subtotalContainer h2 {
     font-size: 20px;
     font-weight: bold;
 }
-  
+
 .subtotalContainer p {
     font-size: 20px;
     font-weight: bold;
@@ -19,16 +19,16 @@
     margin-bottom: 0;
     color: #FF3663;
 }
-  
+
 .subtotalContainer button {
-    background-color: #56D35B; 
+    background-color: #56D35B;
     color: #FFFFFF;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
-  
+
 .subtotalContainer button:hover {
     background-color: #2caf31;
 }

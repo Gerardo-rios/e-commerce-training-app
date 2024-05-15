@@ -16,7 +16,7 @@ function Cart () {
             }]} className='CartItem'/>
         </div>
     );
-    
+
 }
 
 export { Cart }

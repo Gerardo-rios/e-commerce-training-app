@@ -27,10 +27,8 @@ function Item({ item }) {
 
     return (
         <div className="itemContainer">
-            <div className="itemImage">
-                <img src={item.image} alt={item.name} />
-                <AiOutlineCloseCircle className="removeItems" onClick={handleRemoveItems}/>
-            </div>
+            <AiOutlineCloseCircle className="removeItems" onClick={handleRemoveItems}/>
+            <img src={item.image} alt={item.name} />
             <div className="itemDetails">
                 <p>${item.price}</p>
                 <div className="QuantityIndicator">
