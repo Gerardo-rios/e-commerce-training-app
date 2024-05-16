@@ -2,15 +2,15 @@ import PropTypes from 'prop-types';
 import './Subtotal.css';
 
 Subtotal.propTypes = {
-    cart: PropTypes.array.isRequired,
+    subtotal: PropTypes.number.isRequired,
 }
 
-function Subtotal ({ cart }) {
-  const total = cart.reduce((acc, item) => acc + item.price, 0);
+function Subtotal ({ subtotal }) {
+  
   return (
     <div className='subtotalContainer'>
       <h2>Subtotal</h2>
-      <p>${total}</p>
+      <p>${subtotal}</p>
       <button>Continue</button>
     </div>
   );

@@ -1,8 +1,10 @@
 import { useState, useContext } from 'react';
-import './Modal.css'
-import { Rating } from "../Filter/RatingFilter/Rating"
-import { AiOutlineCloseCircle, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
+import './Modal.css';
+import { Rating } from "../Filter/RatingFilter/Rating";
+import { AiOutlineCloseCircle, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 import { SearchContext } from '../../contexts/SearchContext';
+import { CartContext } from '../../contexts/CartContext';
+import { v4 as uuidv4 } from 'uuid';
 
 function Modal () {
     const {
@@ -14,25 +16,47 @@ function Modal () {
         productRate,
     } = useContext(SearchContext);
 
+    const { setCartItems } = useContext(CartContext);
+
     const [quantity, setQuantity] = useState(1);
 
     const setCloseModal = () => {
-        setIsOpen(false)
-    }
+        setIsOpen(false);
+    };
 
     const handleAddToCart = () => {
-        console.log(`Added ${quantity} ${titleProduct} to cart`);
-    }
+        setCartItems((prevCartItems) => {
+            const itemIndex = prevCartItems.findIndex((item) => item.title === titleProduct);
+            if (itemIndex >= 0) {
+                const newCartItems = [...prevCartItems];
+                newCartItems[itemIndex] = {
+                    ...newCartItems[itemIndex],
+                    quantity: newCartItems[itemIndex].quantity + quantity
+                };
+                return newCartItems;
+            } else {
+                return [
+                    ...prevCartItems,
+                    {
+                        id: uuidv4(),
+                        title: titleProduct,
+                        price: priceProduct,
+                        quantity: quantity,
+                        image: imageProduct,
+                    }
+                ];
+            }
+        });
+        setQuantity(1);
+    };
 
     const incrementQuantity = () => {
-        setQuantity(quantity + 1);
-    }
+        setQuantity((prevQuantity) => prevQuantity + 1);
+    };
 
     const decrementQuantity = () => {
-        if (quantity > 1) {
-            setQuantity(quantity - 1);
-        }
-    }
+        setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+    };
 
     return (
         <div className='ModalContainer'>
@@ -59,7 +83,7 @@ function Modal () {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export { Modal }
+export { Modal };

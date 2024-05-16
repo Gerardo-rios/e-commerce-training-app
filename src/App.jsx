@@ -16,8 +16,8 @@ function App() {
         <ResultInfoBar />
         <div className='content-ResultandFilter'>
           <Filter/>
-          <ResultTable />
           <CartProvider>
+            <ResultTable />          
             <Cart />
           </CartProvider>
         </div>
