@@ -4,16 +4,23 @@ import { Navbar } from './components/Navbar'
 import { ResultInfoBar } from './components/ResultInfoBar'
 import { ResultTable } from './components/ResultTable'
 import { SearchProvider } from './contexts/SearchContext'
+import { CartProvider } from './contexts/CartContext'
+import { Cart } from './components/Cart'
 
 function App() {
   return (
     <SearchProvider>
-      <Navbar />
-      <ResultInfoBar />
-      <div className='content-ResultandFilter'>
-        <Filter/>
-        <ResultTable />
-      </div>
+      <CartProvider>
+        <Navbar />
+      </CartProvider>
+        <ResultInfoBar />
+        <div className='content-ResultandFilter'>
+          <Filter/>
+          <CartProvider>
+            <ResultTable />          
+            <Cart />
+          </CartProvider>
+        </div>
     </SearchProvider>
   )
 }

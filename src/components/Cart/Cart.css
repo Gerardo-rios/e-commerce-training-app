@@ -1,0 +1,7 @@
+.CartContainer {
+    grid-area: cart;
+    padding: 10px 20px;
+    min-width: 150px;
+    height: auto;
+    border-left: solid 1px #7E7E7E;
+}
