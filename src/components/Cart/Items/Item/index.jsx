@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import './Item.css';
-import { useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { AiOutlineCloseCircle, AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai'
+import { CartContext } from '../../../../contexts/CartContext';
 
 Item.propTypes = {
     item: PropTypes.object.isRequired,
@@ -9,16 +10,41 @@ Item.propTypes = {
 
 function Item({ item }) {
 
-    const [quantity, setQuantity] = useState(1);
+    const { setCartItems } = useContext(CartContext);
+
+    const [quantity, setQuantity] = useState(item.quantity);
+
+    useEffect(() => {
+        setQuantity(item.quantity);
+    }, [item.quantity]);
+
+    const updateItemCartQuantity = (newQuantity) => {
+        setCartItems(prevCartItems => {
+            return prevCartItems.map(cartItem => {
+                if (cartItem.id === item.id) {
+                    return {
+                        ...cartItem,
+                        quantity: newQuantity,
+                    }
+                }
+                return cartItem;
+            });
+        });
+    };
 
     const incrementQuantity = () => {
-        setQuantity(quantity + 1);
+        setQuantity(prevQuantity => prevQuantity + 1);
+        updateItemCartQuantity(quantity + 1);
     }
 
     const decrementQuantity = () => {
-        if (quantity > 1) {
-            setQuantity(quantity - 1);
-        }
+        setQuantity(prevQuantity => {
+            if (prevQuantity > 1) {
+                return prevQuantity - 1;
+            }
+            return prevQuantity;
+        });
+        updateItemCartQuantity(quantity - 1);
     }
 
     const handleRemoveItems = () => {
@@ -28,7 +54,7 @@ function Item({ item }) {
     return (
         <div className="itemContainer">
             <AiOutlineCloseCircle className="removeItems" onClick={handleRemoveItems}/>
-            <img src={item.image} alt={item.name} />
+            <img src={item.image} alt={item.title} />
             <div className="itemDetails">
                 <p>${item.price}</p>
                 <div className="QuantityIndicator">

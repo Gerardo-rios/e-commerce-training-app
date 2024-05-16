@@ -9,15 +9,16 @@ CartProvider.propTypes = {
 
 function CartProvider({ children }) {
     const [cartIsOpen, setCartIsOpen] = useState(true);
-    const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0);
 
+    const [cartItems, setCartItems] = useState(() => {
+        const savedCart = localStorage.getItem('cartItems');
+        return savedCart ? JSON.parse(savedCart) : [];
+    });
+
     useEffect(() => {
-        const cart = JSON.parse(localStorage.getItem('cart'));
-        if (cart) {
-            setCartItems(cart);
-        }
-    }, []);
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }, [cartItems]);
 
     useEffect(() => {
         const total = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
